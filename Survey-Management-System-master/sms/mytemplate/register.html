@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title Page-->
+    <title>Register</title>
+
+    <!-- Icons font CSS-->
+    <link href="{% static 'register/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'register/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'register/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'register/vendor/datepicker/daterangepicker.css' %}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{% static 'register/css/main.css' %}" rel="stylesheet" media="all">
+    <style>          
+          .logo {
+                line-height: 60px;
+                position: fixed;
+                float: left;
+                margin: 16px 46px;
+                color: #fff;
+                font-weight: bold;
+                font-size: 20px;
+                letter-spacing: 2px;
+          }
+          nav {
+                position: fixed;
+                width: 100%;
+                line-height: 60px;
+          }
+          nav a {
+                text-decoration: none;
+                color: rgb(63, 60, 60);
+                font-size: 16px;
+                padding: 15px 24px;
+          }
+          body {
+              background-color: rgb(215, 234, 250);
+          }
+          .menu-icon {
+                line-height: 60px;
+                width: 100%;
+                background: #000;
+                text-align: right;
+                box-sizing: border-box;
+                padding: 15px 24px;
+                cursor: pointer;
+                color: #fff;
+                display: none;
+          }
+                  
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="menu-icon">
+                <i class="fa fa-bars fa-2x"></i>
+            </div>
+            <div class="logo1">
+                <a href="/"> HOME </a>
+            </div>
+        </nav>
+    </header>
+    <div class="page-wrapper p-t-100 p-b-100 font-robo">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-1">
+                <div class="card-body">
+                    <h2 class="title">Registration Info</h2>
+                    <form action="/register/" method="POST">
+            			{% csrf_token %}
+                        <div class="row row-space">
+                            <div class="col-2 input-group">
+                                <input class="input--style-1" type="text" placeholder="First Name" name="fname" required>
+                            </div>
+                            <div class="col-2 input-group">
+                                <input class="input--style-1" type="text" placeholder="Last Name" name="lname" required>                                
+                            </div>
+                        </div>
+                        <div class="input-group">
+                                <input class="input--style-1" type="text" placeholder="Username" name="uname" required>
+                        </div>
+                        <div class="input-group">
+                                <input class="input--style-1" type="email" placeholder="Email" name="email" required>
+                        </div>
+                        <div class="input-group">
+                                <input class="input--style-1" type="password" placeholder="Password" name="pass1" required>
+                        </div>
+                        <div class="input-group">
+                                <input class="input--style-1" type="password" placeholder="Retype Password" name="pass2" required>
+                        </div>
+                        <div class="p-t-20">
+                            <button class="btn btn--radius btn--green" type="submit">Submit</button>
+                        </div>
+                        {% for message in messages %}
+							<span style= "font-size: 16px;color:rgb(121, 4, 4);">
+								{{message}}
+							</span>
+                        {% endfor %}
+                        <br>
+                        <div style="text-align: center;">
+                            <span style="color:rgb(51, 59, 61);">
+                                Already have an account?
+                            </span>
+    
+                            <a href="/login/">
+                                Login
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'register/vendor/jquery/jquery.min.js' %}"></script>
+    <!-- Vendor JS-->
+    <script src="{% static 'register/vendor/select2/select2.min.js' %}"></script>
+    <script src="{% static 'register/vendor/datepicker/moment.min.js' %}"></script>
+    <script src="{% static 'register/vendor/datepicker/daterangepicker.js' %}"></script>
+
+    <!-- Main JS-->
+    <script src="{% static 'register/js/global.js' %}"></script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->

@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Dashboard</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
+		<style>
+			.navbar {
+				background-color:black;
+				opacity: 0.8;
+			}
+			.move-right{
+				float: right !important;
+			}
+			
+			.main{
+			 margin: 5%;
+			}
+
+			.card{
+			     border-radius: 5px; 
+			     padding-bottom: 20px;
+			     padding: 15px;
+			    }
+			 .card div:hover{
+			 	cursor: pointer;
+			 }
+			.image img{
+			  width: 100%;
+			  border-top-right-radius: 5px;
+			  border-top-left-radius: 5px;
+			 }
+
+			.title{
+			  text-align: center;
+			  padding: 2px;
+			 }
+
+			h1{
+			  font-size: 20px;
+			 }
+
+			.des{
+			  padding: 3px;
+			  text-align: center;
+			 
+			  padding-top: 10px;
+			        border-bottom-right-radius: 5px;
+			  border-bottom-left-radius: 5px;
+			}
+			.header{
+                    width: 100%;
+                    background-color: #0d77b6 !important;
+                    height: 60px;
+                }
+
+             #fixedbutton {
+			    position: fixed;
+			    bottom: 10px;
+			    right: 25px; 
+			}
+			#fixedbutton:hover{
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+            <nav class="navbar navbar-expand-sm navbar-dark fixed-top" >
+				<span class="navbar-brand">Hi, {{user.first_name}} </span>
+				<ul class="navbar-nav ml-auto">
+					<li ><a class="nav-link" href="editprofile/">Edit profile</a></li>
+					<li ><a class="nav-link" href="/logout">Logout</a></li>
+				</ul>
+            </nav>
+		</header>
+		
+		<div class="row main" >
+			{% for survey in surveys %}
+
+					<div class="card col-bg-2 col-md-3 col-sm-6">
+						<div onclick="window.location.href='editor/{{survey.id}}'">
+						<div class="image">
+						   <img src="{% static 'form_img.png' %}">
+						</div>
+							<div class="title">
+							 <h1>{{survey.title}}</h1>
+							</div>
+							 <div> created {{survey.createDate|date:'d M Y'}} <a style="float: right;" href="response/{{survey.id}}">Response</a></div>
+						</div>
+						<div style="color: blue;text-align: center;">
+							<span onclick="window.location.href='preview/{{survey.id}}'" style="float: left;">Preview</span> 
+							<span onclick="window.location.href='collab/{{survey.id}}'" style="display: inline-block;">Collaborators</span> 
+							<span onclick="deletion( '{{survey.title}}','{{survey.id}}')" style="float: right;">Delete</span>
+						</div>
+
+					</div>
+			{% endfor %}
+		</div>
+
+		<img src="{% static 'add_button.png' %}" id="fixedbutton" width="100px" height="100px" onclick="window.location.href='create/'">
+
+		<script>
+			function deletion(name,id){
+				if(confirm('Are you sure you want to delete '+name+'?')){
+					window.location.href = "delete/"+id;
+				}
+			}
+			function popupWindow(url, title, win, w, h) {
+				const y = win.top.outerHeight / 2 + win.top.screenY - ( h / 2);
+				const x = win.top.outerWidth / 2 + win.top.screenX - ( w / 2);
+				return win.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+y+', left='+x);
+			}
+        </script>
+	</div>
+	</body>
+</html>
